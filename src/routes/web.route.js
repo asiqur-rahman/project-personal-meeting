@@ -5,8 +5,9 @@ const awaitHandlerFactory = require('../middleware/awaitHandlerFactory.middlewar
 const { v4: uuidv4 } = require('uuid');
 
 // // router.get(['/'], (req, res) => {res.redirect(`/room/${uuidv4()}`)});
-router.get(['/'], awaitHandlerFactory(webController.landingPage));
-// router.post(['/'], global.bodyParser, global.csrfProtection, awaitHandlerFactory(userController.landingPage));
+router.get(['/'], awaitHandlerFactory(webController.landingPageGet));
+router.post(['/'], awaitHandlerFactory(webController.landingPagePost));
+router.get(['/join/:room'], awaitHandlerFactory(webController.landingPagePost));
 // router.get(['/end-meeting'], awaitHandlerFactory(userController.endMeeting));
 // // router.get(['/end-meeting/:message'], awaitHandlerFactory(userController.endMeeting));
 // router.get(['/login'], awaitHandlerFactory(userController.login));

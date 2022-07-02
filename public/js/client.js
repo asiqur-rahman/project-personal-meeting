@@ -7,7 +7,7 @@ const roomId = getRoomId();
 const peerInfo = getPeerInfo();
 const peerLoockupUrl = 'https://extreme-ip-lookup.com/json/?key=demo2'; // get your API Key at https://extreme-ip-lookup.com
 const avatarApiUrl = 'https://eu.ui-avatars.com/api';
-const surveyURL = 'https://www.questionpro.com/t/AUs7VZq00L';
+const surveyURL = '/';
 const welcomeImg = '../images/image-placeholder.png';
 const shareUrlImg = '../images/image-placeholder.png';
 const leaveRoomImg = '../images/leave-room.png';
@@ -484,8 +484,6 @@ function setTippy(elem, content, placement) {
 
 /**
  * Get peer info using DetecRTC
- * https://github.com/muaz-khan/DetectRTC
- * @returns {object} peer info
  */
 function getPeerInfo() {
     return {
@@ -729,8 +727,8 @@ function whoAreYou() {
         allowEscapeKey: false,
         background: swalBackground,
         position: 'center',
-        imageAlt: 'braintechsolution-name',
-        imageUrl: welcomeImg,
+        // imageAlt: 'braintechsolution-name',
+        // imageUrl: welcomeImg,
         title: 'Enter your name',
         input: 'text',
         html: `<br>
@@ -817,46 +815,47 @@ function joinToChannel() {
  * welcome message
  */
 function welcomeUser() {
-    const myRoomUrl = window.location.href;
+    // const myRoomUrl = window.location.href;
     playSound('newMessage');
-    Swal.fire({
-        background: swalBackground,
-        position: 'center',
-        title: '<strong>Welcome ' + myPeerName + '</strong>',
-        imageAlt: 'braintechsolution-welcome',
-        imageUrl: welcomeImg,
-        html:
-            `
-        <br/> 
-        <p style="color:white;">Invite others to join. Share this meeting link.</p>
-        <p style="color:rgb(8, 189, 89);">` +
-            myRoomUrl +
-            `</p>`,
-        showDenyButton: true,
-        showCancelButton: true,
-        confirmButtonText: `Copy URL`,
-        denyButtonText: `Email invite`,
-        cancelButtonText: `Close`,
-        showClass: {
-            popup: 'animate__animated animate__fadeInDown',
-        },
-        hideClass: {
-            popup: 'animate__animated animate__fadeOutUp',
-        },
-    }).then((result) => {
-        if (result.isConfirmed) {
-            copyRoomURL();
-        } else if (result.isDenied) {
-            let message = {
-                email: '',
-                subject: 'Please join our BrainTechSolution Video Chat Meeting',
-                body: 'Click to join: ' + myRoomUrl,
-            };
-            shareRoomByEmail(message);
-        }
-        // share screen on join room
-        checkShareScreen();
-    });
+    checkShareScreen();
+    // Swal.fire({
+    //     background: swalBackground,
+    //     position: 'center',
+    //     title: '<strong>Welcome ' + myPeerName + '</strong>',
+    //     imageAlt: 'braintechsolution-welcome',
+    //     imageUrl: welcomeImg,
+    //     html:
+    //         `
+    //     <br/> 
+    //     <p style="color:white;">Invite others to join. Share this meeting link.</p>
+    //     <p style="color:rgb(8, 189, 89);">` +
+    //         myRoomUrl +
+    //         `</p>`,
+    //     showDenyButton: true,
+    //     showCancelButton: true,
+    //     confirmButtonText: `Copy URL`,
+    //     denyButtonText: `Email invite`,
+    //     cancelButtonText: `Close`,
+    //     showClass: {
+    //         popup: 'animate__animated animate__fadeInDown',
+    //     },
+    //     hideClass: {
+    //         popup: 'animate__animated animate__fadeOutUp',
+    //     },
+    // }).then((result) => {
+    //     if (result.isConfirmed) {
+    //         copyRoomURL();
+    //     } else if (result.isDenied) {
+    //         let message = {
+    //             email: '',
+    //             subject: 'Please join our BrainTechSolution Video Chat Meeting',
+    //             body: 'Click to join: ' + myRoomUrl,
+    //         };
+    //         shareRoomByEmail(message);
+    //     }
+    //     // share screen on join room
+    //     checkShareScreen();
+    // });
 }
 
 /**

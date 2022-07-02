@@ -45,7 +45,7 @@
           <h3>Start a Meeting now</h3>
        </div>
        <div class="property-search-body">
-          <form action="/" method="post">
+          <form method="post" action="/">
              <div class="row">
                 <div class="col-md-12">
                    <p>
@@ -56,10 +56,24 @@
              <div class="row">
                 <div class="col-md-12">
                    <p>
-                      <input type="email" placeholder="Your Email">
+                      <input type="email" name="email" placeholder="Your Email" required>
                    </p>
                 </div>
              </div>
+             <div class="row">
+               <div class="col-md-12">
+                  <p>
+                     <input type="text" id="roomName" name="roomName" placeholder="Room Name" required>
+                  </p>
+               </div>
+            </div>
+             <div class="row">
+               <div class="col-md-12">
+                  <p>
+                     <input type="password" placeholder="Password (Optional)">
+                  </p>
+               </div>
+            </div>
              <!-- <div class="row">
                 <div class="col-md-6">
                    <p>
@@ -82,7 +96,7 @@
                    </p>
                 </div>
              </div> -->
-             <div class="row">
+             <!-- <div class="row">
                 <div class="col-md-6" style="padding-right: 1px;">
                    <p>
                       <input type="password" placeholder="Password (Optional)">
@@ -93,7 +107,7 @@
                       <input type="password" placeholder="Confirm Password">
                    </p>
                 </div>
-             </div>
+             </div> -->
              <div class="row">
                 <div class="col-md-12">
                    <div class="checkbox-property">
@@ -136,9 +150,24 @@
     </div>
  </section>
  <!-- Slider Area End -->
-      
 
 <%- contentFor('FooterJs') %>
+<script defer src="/public/js/newRoom.js"></script>
+<script>
+   document.getElementById('roomName').onkeyup = (e) => {
+       if (e.keyCode === 13) {
+           e.preventDefault();
+           joinRoom();
+       }
+   };
+   function joinRoom(e) {
+      debugger;
+      let roomName = document.getElementById('roomName').value;
+      alert(roomName)
+      window.location.href = '/join/' + roomName;
+      return false;
+   }
+</script>
 
 
 

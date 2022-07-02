@@ -11,6 +11,7 @@ const path = require('path');
 const app = express();
 const Config = require('../../config.json');
 const PageRouter = require('../../src/routes/routes');
+const bodyParser = require('body-parser');
 
 //For set layouts of html view
 var expressLayouts = require('express-ejs-layouts');
@@ -24,6 +25,10 @@ app.use('/files',express.static('files'));
 app.get('/layouts/', function(req, res) {
     res.render('view');
 });
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({limit: '10mb'}));
 
 const Logger = require('./Logger');
 const log = new Logger('server');
@@ -76,8 +81,6 @@ const turnUrls = Config.AppSettings.TURN_URLS;
 const turnUsername = Config.AppSettings.TURN_USERNAME;
 const turnCredential = Config.AppSettings.TURN_PASSWORD;
 
-const bodyParser = require('body-parser');
-
 // directory
 const dir = {
     public: path.join(__dirname, '../../', 'public'),
@@ -102,6 +105,7 @@ app.use(compression()); // Compress all HTTP responses using GZip
 app.use(express.json()); // Api parse body data as json
 app.use(express.static(dir.public)); // Use all static files from the public folder
 app.use(bodyParser.urlencoded({ extended: true })); // Need for Slack API body parser
+app.use(bodyParser.json({limit: '10mb'}));
 
 // Remove trailing slashes in url handle bad requests
 app.use((err, req, res, next) => {
@@ -129,11 +133,6 @@ PageRouter(app);
 //     res.sendFile(views.landing);
 // });
 
-// braintechsolution about
-app.get(['/about'], (req, res) => {
-    res.sendFile(views.about);
-});
-
 // set new room name and join
 app.get(['/newcall'], (req, res) => {
     res.sendFile(views.newCall);
@@ -150,27 +149,27 @@ app.get(['/privacy'], (req, res) => {
 });
 
 // no room name specified to join
-app.get('/join/', (req, res) => {
-    if (Object.keys(req.query).length > 0) {
-        log.debug('Request Query', req.query);
-        /* 
-            http://localhost:3000/join?room=test&name=braintechsolution&audio=1&video=1&screen=1&notify=1
-            https://braintechsolution.up.railway.app/join?room=test&name=braintechsolution&audio=1&video=1&screen=1&notify=1
-            https://braintechsolution.herokuapp.com/join?room=test&name=braintechsolution&audio=1&video=1&screen=1&notify=1
-        */
-        const { room, name, audio, video, screen, notify } = req.query;
-        // all the params are mandatory for the direct room join
-        if (room && name && audio && video && screen && notify) {
-            return res.sendFile(views.client);
-        }
-    }
-    res.redirect('/');
-});
+// app.get('/join/', (req, res) => {
+//     if (Object.keys(req.query).length > 0) {
+//         log.debug('Request Query', req.query);
+//         /* 
+//             http://localhost:3000/join?room=test&name=braintechsolution&audio=1&video=1&screen=1&notify=1
+//             https://braintechsolution.up.railway.app/join?room=test&name=braintechsolution&audio=1&video=1&screen=1&notify=1
+//             https://braintechsolution.herokuapp.com/join?room=test&name=braintechsolution&audio=1&video=1&screen=1&notify=1
+//         */
+//         const { room, name, audio, video, screen, notify } = req.query;
+//         // all the params are mandatory for the direct room join
+//         if (room && name && audio && video && screen && notify) {
+//             return res.sendFile(views.client);
+//         }
+//     }
+//     res.redirect('/');
+// });
 
 // Join Room *
-app.get('/join/*', (req, res) => {
-    res.sendFile(views.client);
-});
+// app.get('/join/*', (req, res) => {
+//     res.sendFile(views.client);
+// });
 
 // api docs
 app.use(apiBasePath + '/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -209,9 +208,9 @@ function getMeetingURL(host) {
 }
 
 // not match any of page before, so 404 not found
-app.get('*', function (req, res) {
-    res.sendFile(views.notFound);
-});
+// app.get('*', function (req, res) {
+//     res.sendFile(views.notFound);
+// });
 
 const iceServers = [];
 
