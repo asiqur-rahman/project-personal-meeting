@@ -1,24 +1,5 @@
-/*
- ██████ ██      ██ ███████ ███    ██ ████████ 
-██      ██      ██ ██      ████   ██    ██    
-██      ██      ██ █████   ██ ██  ██    ██    
-██      ██      ██ ██      ██  ██ ██    ██    
- ██████ ███████ ██ ███████ ██   ████    ██   
-*/
 
-/**
- * MiroTalk P2P - Client component
- *
- * @link    GitHub: https://github.com/miroslavpejic85/mirotalk
- * @link    Live demo: https://p2p.mirotalk.org or https://mirotalk.up.railway.app or https://mirotalk.herokuapp.com
- * @license For open source use: AGPLv3
- * @license For commercial or closed source, contact us at info.mirotalk@gmail.com
- * @author  Miroslav Pejic - miroslav.pejic.85@gmail.com
- * @version 1.0.0
- *
- */
-
-'use strict'; // https://www.w3schools.com/js/js_strict.asp
+'use strict'; 
 
 const isHttps = false; // must be the same on server.js
 const signalingServer = getSignalingServer();
@@ -39,7 +20,7 @@ const deleteImg = '../images/delete.png';
 const youtubeImg = '../images/youtube.png';
 const messageImg = '../images/message.png';
 const kickedOutImg = '../images/leave-room.png';
-const aboutImg = '../images/mirotalk-logo.png';
+const aboutImg = '../images/braintechsolution-logo.png';
 // nice free icon: https://www.iconfinder.com
 
 const surveyActive = true; // when leaving the room give a feedback
@@ -84,8 +65,8 @@ let callStartTime;
 let callElapsedTime;
 let recStartTime;
 let recElapsedTime;
-let mirotalkTheme = 'dark'; // dark - grey ...
-let mirotalkBtnsBar = 'vertical'; // vertical - horizontal
+let braintechsolutionTheme = 'dark'; // dark - grey ...
+let braintechsolutionBtnsBar = 'vertical'; // vertical - horizontal
 let swalBackground = 'rgba(0, 0, 0, 0.7)'; // black - #16171b - transparent ...
 let peerGeo;
 let peerConnection;
@@ -364,9 +345,9 @@ function getHtmlElementsById() {
     videoQualitySelect = getId('videoQuality');
     videoFpsSelect = getId('videoFps');
     screenFpsSelect = getId('screenFps');
-    themeSelect = getId('mirotalkTheme');
+    themeSelect = getId('braintechsolutionTheme');
     videoObjFitSelect = getId('videoObjFitSelect');
-    btnsBarSelect = getId('mirotalkBtnsBar');
+    btnsBarSelect = getId('braintechsolutionBtnsBar');
     // my conference name, hand, video - audio status
     myVideoParagraph = getId('myVideoParagraph');
     myHandStatusIcon = getId('myHandStatusIcon');
@@ -748,7 +729,7 @@ function whoAreYou() {
         allowEscapeKey: false,
         background: swalBackground,
         position: 'center',
-        imageAlt: 'mirotalk-name',
+        imageAlt: 'braintechsolution-name',
         imageUrl: welcomeImg,
         title: 'Enter your name',
         input: 'text',
@@ -811,7 +792,7 @@ function whoAreYouJoin() {
     setPeerAvatarImgName('myVideoAvatarImage', myPeerName);
     setPeerChatAvatarImgName('right', myPeerName);
     joinToChannel();
-    setTheme(mirotalkTheme);
+    setTheme(braintechsolutionTheme);
 }
 
 /**
@@ -842,7 +823,7 @@ function welcomeUser() {
         background: swalBackground,
         position: 'center',
         title: '<strong>Welcome ' + myPeerName + '</strong>',
-        imageAlt: 'mirotalk-welcome',
+        imageAlt: 'braintechsolution-welcome',
         imageUrl: welcomeImg,
         html:
             `
@@ -868,7 +849,7 @@ function welcomeUser() {
         } else if (result.isDenied) {
             let message = {
                 email: '',
-                subject: 'Please join our MiroTalk Video Chat Meeting',
+                subject: 'Please join our BrainTechSolution Video Chat Meeting',
                 body: 'Click to join: ' + myRoomUrl,
             };
             shareRoomByEmail(message);
@@ -982,7 +963,7 @@ function handleRTCDataChannels(peer_id) {
         console.log('handleRTCDataChannels ' + peer_id, event);
         event.channel.onmessage = (msg) => {
             switch (event.channel.label) {
-                case 'mirotalk_chat_channel':
+                case 'braintechsolution_chat_channel':
                     try {
                         let dataMessage = JSON.parse(msg.data);
                         switch (dataMessage.type) {
@@ -997,15 +978,15 @@ function handleRTCDataChannels(peer_id) {
                                 break;
                         }
                     } catch (err) {
-                        console.error('mirotalk_chat_channel', err);
+                        console.error('braintechsolution_chat_channel', err);
                     }
                     break;
-                case 'mirotalk_file_sharing_channel':
+                case 'braintechsolution_file_sharing_channel':
                     try {
                         let dataFile = msg.data;
                         handleDataChannelFileSharing(dataFile);
                     } catch (err) {
-                        console.error('mirotalk_file_sharing_channel', err);
+                        console.error('braintechsolution_file_sharing_channel', err);
                     }
                     break;
             }
@@ -1165,14 +1146,14 @@ function handleRemovePeer(config) {
 }
 
 /**
- * Set mirotalk theme | dark | grey | ...
+ * Set braintechsolution theme | dark | grey | ...
  * @param {string} theme type
  */
 function setTheme(theme) {
     if (!theme) return;
 
-    mirotalkTheme = theme;
-    switch (mirotalkTheme) {
+    braintechsolutionTheme = theme;
+    switch (braintechsolutionTheme) {
         case 'dark':
             // dark theme
             swalBackground = 'radial-gradient(#393939, #000000)';
@@ -1204,7 +1185,7 @@ function setTheme(theme) {
             console.log('No theme found');
     }
 
-    setButtonsBarPosition(mirotalkBtnsBar);
+    setButtonsBarPosition(braintechsolutionBtnsBar);
 }
 
 /**
@@ -1214,8 +1195,8 @@ function setTheme(theme) {
 function setButtonsBarPosition(position) {
     if (!position || isMobileDevice) return;
 
-    mirotalkBtnsBar = position;
-    switch (mirotalkBtnsBar) {
+    braintechsolutionBtnsBar = position;
+    switch (braintechsolutionBtnsBar) {
         case 'vertical':
             document.documentElement.style.setProperty('--btns-top', '50%');
             document.documentElement.style.setProperty('--btns-right', '0px');
@@ -2904,7 +2885,7 @@ async function shareRoomUrl() {
             background: swalBackground,
             position: 'center',
             title: 'Share Room',
-            // imageAlt: 'mirotalk-share',
+            // imageAlt: 'braintechsolution-share',
             // imageUrl: shareUrlImg,
             html:
                 `
@@ -2934,7 +2915,7 @@ async function shareRoomUrl() {
             } else if (result.isDenied) {
                 let message = {
                     email: '',
-                    subject: 'Please join our MiroTalk Video Chat Meeting',
+                    subject: 'Please join our BrainTechSolution Video Chat Meeting',
                     body: 'Click to join: ' + myRoomUrl,
                 };
                 shareRoomByEmail(message);
@@ -3449,7 +3430,7 @@ function downloadRecordedStream() {
  * @param {string} peer_id socket.id
  */
 function createChatDataChannel(peer_id) {
-    chatDataChannels[peer_id] = peerConnections[peer_id].createDataChannel('mirotalk_chat_channel');
+    chatDataChannels[peer_id] = peerConnections[peer_id].createDataChannel('braintechsolution_chat_channel');
     chatDataChannels[peer_id].onopen = (event) => {
         console.log('chatDataChannels created', event);
     };
@@ -5095,7 +5076,7 @@ function handleWhiteboardAction(config, logme = true) {
  * @param {string} peer_id socket.id
  */
 function createFileSharingDataChannel(peer_id) {
-    fileDataChannels[peer_id] = peerConnections[peer_id].createDataChannel('mirotalk_file_sharing_channel');
+    fileDataChannels[peer_id] = peerConnections[peer_id].createDataChannel('braintechsolution_file_sharing_channel');
     fileDataChannels[peer_id].binaryType = 'arraybuffer';
     fileDataChannels[peer_id].onopen = (event) => {
         console.log('fileDataChannels created', event);
@@ -5251,7 +5232,7 @@ function selectFileToShare(peer_id, broadcast = false) {
     Swal.fire({
         allowOutsideClick: false,
         background: swalBackground,
-        imageAlt: 'mirotalk-file-sharing',
+        imageAlt: 'braintechsolution-file-sharing',
         imageUrl: fileSharingImg,
         position: 'center',
         title: 'Share file',
@@ -5366,7 +5347,7 @@ function endDownload() {
                 title: 'Received file',
                 text: incomingFileInfo.fileName + ' size ' + bytesToSize(incomingFileInfo.fileSize),
                 imageUrl: e.target.result,
-                imageAlt: 'mirotalk-file-img-download',
+                imageAlt: 'braintechsolution-file-img-download',
                 showDenyButton: true,
                 confirmButtonText: `Save`,
                 denyButtonText: `Cancel`,
@@ -5387,7 +5368,7 @@ function endDownload() {
         Swal.fire({
             allowOutsideClick: false,
             background: swalBackground,
-            imageAlt: 'mirotalk-file-download',
+            imageAlt: 'braintechsolution-file-download',
             imageUrl: fileSharingImg,
             position: 'center',
             title: 'Received file',
@@ -5638,7 +5619,7 @@ function handleKickedOut(config) {
 }
 
 /**
- * MiroTalk about info
+ * BrainTechSolution about info
  */
 function showAbout() {
     playSound('newMessage');
@@ -5647,12 +5628,12 @@ function showAbout() {
         background: swalBackground,
         position: 'center',
         title: '<strong>WebRTC P2P</strong>',
-        imageAlt: 'mirotalk-about',
+        imageAlt: 'braintechsolution-about',
         imageUrl: aboutImg,
         html: `
         <br/>
         <div id="about">
-            <b><a href="https://github.com/miroslavpejic85/mirotalk" target="_blank">Open Source</a></b> project
+            <b><a href="https://github.com/miroslavpejic85/braintechsolution" target="_blank">Open Source</a></b> project
             <br/><br/>
             <button class="pulsate" onclick="window.open('https://github.com/sponsors/miroslavpejic85?o=esb')"><i class="fas fa-heart" ></i>&nbsp;Sponsor</button>
             <br /><br />

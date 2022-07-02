@@ -1,5 +1,5 @@
 {
-    "name": "mirotalk",
+    "name": "braintechsolution",
     "version": "1.0.0",
     "description": "A free WebRTC browser-based video call",
     "main": "server.js",
@@ -10,11 +10,11 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/miroslavpejic85/mirotalk"
+        "url": "git+https://github.com/miroslavpejic85/braintechsolution"
     },
     "author": "Miroslav Pejic",
     "license": "AGPL-3.0",
-    "homepage": "https://github.com/miroslavpejic85/mirotalk",
+    "homepage": "https://github.com/miroslavpejic85/braintechsolution",
     "dependencies": {
         "body-parser": "^1.20.0",
         "compression": "^1.7.4",

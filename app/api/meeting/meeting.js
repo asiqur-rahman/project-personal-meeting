@@ -1,13 +1,13 @@
 const fetch = require('node-fetch');
 
-const API_KEY = 'mirotalk_default_secret';
-// const MIROTALK_URL = 'http://localhost:3000/api/v1/meeting';
-// const MIROTALK_URL = 'https://p2p.mirotalk.com/api/v1/meeting';
-// const MIROTALK_URL = 'https://mirotalk.up.railway.app/api/v1/meeting';
-const MIROTALK_URL = 'https://mirotalk.herokuapp.com/api/v1/meeting';
+const API_KEY = 'braintechsolution_default_secret';
+// const BRAINTECHSOLUTION_URL = 'http://localhost:3000/api/v1/meeting';
+// const BRAINTECHSOLUTION_URL = 'https://p2p.braintechsolution.com/api/v1/meeting';
+// const BRAINTECHSOLUTION_URL = 'https://braintechsolution.up.railway.app/api/v1/meeting';
+const BRAINTECHSOLUTION_URL = 'https://braintechsolution.herokuapp.com/api/v1/meeting';
 
 function getResponse() {
-    return fetch(MIROTALK_URL, {
+    return fetch(BRAINTECHSOLUTION_URL, {
         method: 'POST',
         headers: {
             authorization: API_KEY,

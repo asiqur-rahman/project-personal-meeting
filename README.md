@@ -1,17 +1,17 @@
-# <p align="center">MiroTalk P2P</p>
+# <p align="center">BrainTechSolution P2P</p>
 
 <p align="center">Free WebRTC - P2P - Simple, Secure, Fast Real-Time Video Conferences Up to 4k and 60fps, compatible with all browsers and platforms.</p>
 
 <hr />
 
 <p align="center">
-    <a href="https://p2p.mirotalk.com">p2p.mirotalk.com</a>
+    <a href="https://p2p.braintechsolution.com">p2p.braintechsolution.com</a>
 </p>
 
 <hr />
 
 <p align="center">
-    <a href="https://p2p.mirotalk.com"><img src="public/images/mirotalk-header.gif"></a>
+    <a href="https://p2p.braintechsolution.com"><img src="public/images/braintechsolution-header.gif"></a>
 </p>
 
 <hr />
@@ -55,7 +55,7 @@
 
 <br/>
 
-<a href="https://www.canva.com/design/DAE693uLOIU/view">MiroTalk presentation </a> - <a href="https://www.youtube.com/watch?v=_IVn2aINYww">video</a>
+<a href="https://www.canva.com/design/DAE693uLOIU/view">BrainTechSolution presentation </a> - <a href="https://www.youtube.com/watch?v=_IVn2aINYww">video</a>
 
 </details>
 
@@ -64,9 +64,9 @@
 
 <br/>
 
--   `Open` https://p2p.mirotalk.com/newcall or
--   https://mirotalk.up.railway.app/newcall or
--   https://mirotalk.herokuapp.com/newcall
+-   `Open` https://p2p.braintechsolution.com/newcall or
+-   https://braintechsolution.up.railway.app/newcall or
+-   https://braintechsolution.herokuapp.com/newcall
 -   `Pick` your Room name and Join
 -   `Allow` using the camera and microphone
 -   `Share` the Room URL and Wait for someone to join for the video conference
@@ -79,9 +79,9 @@
 <br/>
 
 -   You can `join` directly to `room` by going to:
--   https://p2p.mirotalk.com/join?room=test&name=mirotalk&audio=0&video=0&screen=0&notify=0
--   https://mirotalk.up.railway.app/join?room=test&name=mirotalk&audio=0&video=0&screen=0&notify=0
--   https://mirotalk.herokuapp.com/join?room=test&name=mirotalk&audio=0&video=0&screen=0&notify=0
+-   https://p2p.braintechsolution.com/join?room=test&name=braintechsolution&audio=0&video=0&screen=0&notify=0
+-   https://braintechsolution.up.railway.app/join?room=test&name=braintechsolution&audio=0&video=0&screen=0&notify=0
+-   https://braintechsolution.herokuapp.com/join?room=test&name=braintechsolution&audio=0&video=0&screen=0&notify=0
 
     | Params | Type    | Description     |
     | ------ | ------- | --------------- |
@@ -104,7 +104,7 @@ Embedding a meeting into a service or app using an iframe.
 ```html
 <iframe
     allow="camera; microphone; fullscreen; display-capture; autoplay"
-    src="https://mirotalk.herokuapp.com/newcall"
+    src="https://braintechsolution.herokuapp.com/newcall"
     style="height: 100%; width: 100%; border: 0px;"
 ></iframe>
 ```
@@ -120,9 +120,9 @@ Embedding a meeting into a service or app using an iframe.
 
 ```bash
 # clone this repo
-$ git clone https://github.com/miroslavpejic85/mirotalk.git
-# go to mirotalk dir
-$ cd mirotalk
+$ git clone https://github.com/miroslavpejic85/braintechsolution.git
+# go to braintechsolution dir
+$ cd braintechsolution
 # copy .env.template to .env
 $ cp .env.template .env
 # install dependencies
@@ -172,7 +172,7 @@ You can start videoconferencing directly from your Local PC, and be reachable fr
 
 <br/>
 
-`Recommended`, for more info about the Turn check out [here](https://webrtc.org/getting-started/turn-server). Just edit [this part](https://github.com/miroslavpejic85/mirotalk/blob/master/.env.template#L9) on your `.env`.
+`Recommended`, for more info about the Turn check out [here](https://webrtc.org/getting-started/turn-server). Just edit [this part](https://github.com/miroslavpejic85/braintechsolution/blob/master/.env.template#L9) on your `.env`.
 
 </details>
 
@@ -183,15 +183,15 @@ You can start videoconferencing directly from your Local PC, and be reachable fr
 
 ```bash
 # The response will give you a entrypoint / Room URL for your meeting, where authorization: API_KEY_SECRET.
-$ curl -X POST "http://localhost:3000/api/v1/meeting" -H "authorization: mirotalk_default_secret" -H "Content-Type: application/json"
-$ curl -X POST "https://p2p.mirotalk.com/api/v1/meeting" -H "authorization: mirotalk_default_secret" -H "Content-Type: application/json"
-$ curl -X POST "https://mirotalk.up.railway.app/api/v1/meeting" -H "authorization: mirotalk_default_secret" -H "Content-Type: application/json"
-$ curl -X POST "https://mirotalk.herokuapp.com/api/v1/meeting" -H "authorization: mirotalk_default_secret" -H "Content-Type: application/json"
+$ curl -X POST "http://localhost:3000/api/v1/meeting" -H "authorization: braintechsolution_default_secret" -H "Content-Type: application/json"
+$ curl -X POST "https://p2p.braintechsolution.com/api/v1/meeting" -H "authorization: braintechsolution_default_secret" -H "Content-Type: application/json"
+$ curl -X POST "https://braintechsolution.up.railway.app/api/v1/meeting" -H "authorization: braintechsolution_default_secret" -H "Content-Type: application/json"
+$ curl -X POST "https://braintechsolution.herokuapp.com/api/v1/meeting" -H "authorization: braintechsolution_default_secret" -H "Content-Type: application/json"
 ```
 
 ## API Documentation
 
-The API documentation uses [swagger](https://swagger.io/) at http://localhost:3000/api/v1/docs. Or check it out on [live](https://p2p.mirotalk.com/api/v1/docs) & [heroku](https://mirotalk.herokuapp.com/api/v1/docs).
+The API documentation uses [swagger](https://swagger.io/) at http://localhost:3000/api/v1/docs. Or check it out on [live](https://p2p.braintechsolution.com/api/v1/docs) & [heroku](https://braintechsolution.herokuapp.com/api/v1/docs).
 
 </details>
 
@@ -204,7 +204,7 @@ The API documentation uses [swagger](https://swagger.io/) at http://localhost:30
 
 This application is running for `demonstration purposes` on [Hetzner](https://www.hetzner.com/), one of `the best` [cloud providers](https://www.hetzner.com/cloud) and [dedicated root servers](https://www.hetzner.com/dedicated-rootserver).
 
-If you need help to deploy `MiroTalk P2P` instance on `your dedicated cloud server`, or for other needs, don't hesitate to contact us at p2p.mirotalk@gmail.com
+If you need help to deploy `BrainTechSolution P2P` instance on `your dedicated cloud server`, or for other needs, don't hesitate to contact us at p2p.braintechsolution@gmail.com
 
 </details>
 
@@ -213,29 +213,29 @@ If you need help to deploy `MiroTalk P2P` instance on `your dedicated cloud serv
 
 <br/>
 
-<a target="_blank" href="https://p2p.mirotalk.com"><img src="public/sponsors/Hetzner.png" style="width: 220px;"></a>
+<a target="_blank" href="https://p2p.braintechsolution.com"><img src="public/sponsors/Hetzner.png" style="width: 220px;"></a>
 
-https://p2p.mirotalk.com
+https://p2p.braintechsolution.com
 
-[![hetzner-qr](public/images/mirotalk-hetzner-qr.png)](https://p2p.mirotalk.com)
-
-<br>
-
-<a target="_blank" href="https://railway.app/new/template/mirotalk?referralCode=mirotalk"><img src="https://railway.app/button.svg" style="width: 220px;"></a>
-
-https://mirotalk.up.railway.app
-
-[![railway-qr](public/images/mirotalk-railway-qr.png)](https://mirotalk.up.railway.app)
+[![hetzner-qr](public/images/braintechsolution-hetzner-qr.png)](https://p2p.braintechsolution.com)
 
 <br>
 
-<a href="https://heroku.com/deploy?template=https://github.com/miroslavpejic85/mirotalk"><img src="https://www.herokucdn.com/deploy/button.svg" style="width: 220px;" alt="Heroku Deploy"></a>
+<a target="_blank" href="https://railway.app/new/template/braintechsolution?referralCode=braintechsolution"><img src="https://railway.app/button.svg" style="width: 220px;"></a>
 
-https://mirotalk.herokuapp.com
+https://braintechsolution.up.railway.app
 
-[![heroku-qr](public/images/mirotalk-heroku-qr.png)](https://mirotalk.herokuapp.com)
+[![railway-qr](public/images/braintechsolution-railway-qr.png)](https://braintechsolution.up.railway.app)
 
-If you want to deploy a MiroTalk P2P instance on your dedicated server, or for other needs, don't hesitate to contact us at p2p.mirotalk@gmail.com.
+<br>
+
+<a href="https://heroku.com/deploy?template=https://github.com/miroslavpejic85/braintechsolution"><img src="https://www.herokucdn.com/deploy/button.svg" style="width: 220px;" alt="Heroku Deploy"></a>
+
+https://braintechsolution.herokuapp.com
+
+[![heroku-qr](public/images/braintechsolution-heroku-qr.png)](https://braintechsolution.herokuapp.com)
+
+If you want to deploy a BrainTechSolution P2P instance on your dedicated server, or for other needs, don't hesitate to contact us at p2p.braintechsolution@gmail.com.
 
 </details>
 
@@ -285,9 +285,9 @@ Follow [this documentation](docs/self-hosting.md).
 
 [![AGPLv3](public/images/AGPLv3.png)](LICENSE)
 
-MiroTalk is free and can be modified and forked. But the conditions of the AGPLv3 (GNU Affero General Public License v3.0) need to be respected. In particular modifications need to be free as well and made available to the public. Get a quick overview of the license at [Choose an open source license](https://choosealicense.com/licenses/agpl-3.0/).
+BrainTechSolution is free and can be modified and forked. But the conditions of the AGPLv3 (GNU Affero General Public License v3.0) need to be respected. In particular modifications need to be free as well and made available to the public. Get a quick overview of the license at [Choose an open source license](https://choosealicense.com/licenses/agpl-3.0/).
 
-For a MiroTalk license under conditions other than AGPLv3, please contact us at info.mirotalk@gmail.com.
+For a BrainTechSolution license under conditions other than AGPLv3, please contact us at info.braintechsolution@gmail.com.
 
 </details>
 
@@ -296,7 +296,7 @@ For a MiroTalk license under conditions other than AGPLv3, please contact us at 
 
 <br/>
 
-Do you find MiroTalk useful?
+Do you find BrainTechSolution useful?
 
 Support the project by [becoming a backer or sponsor](https://github.com/sponsors/miroslavpejic85). Your logo will show up here with a link to your website.
 
@@ -309,10 +309,10 @@ Support the project by [becoming a backer or sponsor](https://github.com/sponsor
 <br>
 
 <details>
-<summary>MiroTalk SFU</summary>
+<summary>BrainTechSolution SFU</summary>
 
 <br/>
 
-Try also [MiroTalk SFU](https://github.com/miroslavpejic85/mirotalksfu), the difference between the two projects you can found [here](https://github.com/miroslavpejic85/mirotalksfu/issues/14#issuecomment-932701999).
+Try also [BrainTechSolution SFU](https://github.com/miroslavpejic85/braintechsolutionsfu), the difference between the two projects you can found [here](https://github.com/miroslavpejic85/braintechsolutionsfu/issues/14#issuecomment-932701999).
 
 </details>

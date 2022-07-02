@@ -1,4 +1,4 @@
-## MiroTalk P2P - Self Hosting
+## BrainTechSolution P2P - Self Hosting
 
 Requirments:
 
@@ -25,10 +25,10 @@ $ npm install -g npm@latest
 Quick start
 
 ```bash
-# Clone MiroTalk P2P repo
-$ git clone https://github.com/miroslavpejic85/mirotalk.git
-# Go to mirotalk dir
-$ cd mirotalk
+# Clone BrainTechSolution P2P repo
+$ git clone https://github.com/miroslavpejic85/braintechsolution.git
+# Go to braintechsolution dir
+$ cd braintechsolution
 # Copy .env.template to .env and edit it if needed
 $ cp .env.template .env
 # Install dependencies
@@ -113,7 +113,7 @@ $ sudo vim /etc/nginx/sites-enabled/default
 Paste this:
 
 ```bash
-# MiroTalk P2P - HTTPS — proxy all requests to the Node app
+# BrainTechSolution P2P - HTTPS — proxy all requests to the Node app
 server {
 	# Enable HTTP/2
 	listen 443 ssl http2;
@@ -150,13 +150,13 @@ $ sudo certbot renew --dry-run
 $ sudo certbot certificates
 ```
 
-Check Your MiroTalk P2P instance: https://your.domain.name
+Check Your BrainTechSolution P2P instance: https://your.domain.name
 
 ---
 
 ## Update script
 
-In order to have always Your MiroTalk P2P updated to latest, we going to create a script
+In order to have always Your BrainTechSolution P2P updated to latest, we going to create a script
 
 ```bash
 # Create a file p2pUpdate.sh
@@ -170,7 +170,7 @@ If you use `PM2`, paste this:
 ```bash
 #!/bin/bash
 
-cd mirotalk
+cd braintechsolution
 git pull
 pm2 stop app/src/server.js
 sudo npm install
@@ -184,7 +184,7 @@ If you use `Docker`, paste this:
 ```bash
 #!/bin/bash
 
-cd mirotalk
+cd braintechsolution
 git pull
 docker-compose down
 docker-compose build
@@ -200,9 +200,9 @@ Make the script executable
 $ chmod +x p2pUpdate.sh
 ```
 
-Follow the commits of the MiroTalk P2P project [here](https://github.com/miroslavpejic85/mirotalk/commits/master)
+Follow the commits of the BrainTechSolution P2P project [here](https://github.com/miroslavpejic85/braintechsolution/commits/master)
 
-To update Your MiroTalk P2P instance at latest commit, execute:
+To update Your BrainTechSolution P2P instance at latest commit, execute:
 
 ```bash
 ./p2pUpdate.sh
@@ -212,7 +212,7 @@ To update Your MiroTalk P2P instance at latest commit, execute:
 
 ---
 
-## Do you find MiroTalk useful?
+## Do you find BrainTechSolution useful?
 
 Show your appreciation by becoming a [backer or sponsor](https://github.com/sponsors/miroslavpejic85)
 

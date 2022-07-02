@@ -3,7 +3,7 @@
 module.exports = class Logger {
     constructor(appName, debugOn = true) {
         if (appName) this.appName = appName;
-        else this.appName = 'mirotalk';
+        else this.appName = 'braintechsolution';
         this.debugOn = debugOn;
     }
 

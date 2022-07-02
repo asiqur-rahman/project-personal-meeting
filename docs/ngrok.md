@@ -1,6 +1,6 @@
-## MiroTalk P2P - Ngrok
+## BrainTechSolution P2P - Ngrok
 
-If you want to expose MiroTalk P2P from your `Local PC` to outside in `HTTPS`, you need to do 1 thing
+If you want to expose BrainTechSolution P2P from your `Local PC` to outside in `HTTPS`, you need to do 1 thing
 
 Edit the Ngrok part on `.env` file
 
@@ -27,7 +27,7 @@ So open it in your browser, join in the room, share it to whom you want and wait
 
 ---
 
-## Do you find MiroTalk useful?
+## Do you find BrainTechSolution useful?
 
 Show your appreciation by becoming a [backer or sponsor](https://github.com/sponsors/miroslavpejic85)
 

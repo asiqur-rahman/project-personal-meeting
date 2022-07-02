@@ -112,7 +112,7 @@ app.get(['/'], (req, res) => {
     res.sendFile(views.landing);
 });
 
-// mirotalk about
+// braintechsolution about
 app.get(['/about'], (req, res) => {
     res.sendFile(views.about);
 });
@@ -137,9 +137,9 @@ app.get('/join/', (req, res) => {
     if (Object.keys(req.query).length > 0) {
         log.debug('Request Query', req.query);
         /* 
-            http://localhost:3000/join?room=test&name=mirotalk&audio=1&video=1&screen=1&notify=1
-            https://mirotalk.up.railway.app/join?room=test&name=mirotalk&audio=1&video=1&screen=1&notify=1
-            https://mirotalk.herokuapp.com/join?room=test&name=mirotalk&audio=1&video=1&screen=1&notify=1
+            http://localhost:3000/join?room=test&name=braintechsolution&audio=1&video=1&screen=1&notify=1
+            https://braintechsolution.up.railway.app/join?room=test&name=braintechsolution&audio=1&video=1&screen=1&notify=1
+            https://braintechsolution.herokuapp.com/join?room=test&name=braintechsolution&audio=1&video=1&screen=1&notify=1
         */
         const { room, name, audio, video, screen, notify } = req.query;
         // all the params are mandatory for the direct room join
@@ -163,7 +163,7 @@ app.post([apiBasePath + '/meeting'], (req, res) => {
     // check if user was authorized for the api call
     let authorization = req.headers.authorization;
     if (authorization != api_key_secret) {
-        log.debug('MiroTalk get meeting - Unauthorized', {
+        log.debug('BrainTechSolution get meeting - Unauthorized', {
             header: req.headers,
             body: req.body,
         });
@@ -176,7 +176,7 @@ app.post([apiBasePath + '/meeting'], (req, res) => {
     res.end(JSON.stringify({ meeting: meetingURL }));
 
     // log.debug the output if all done
-    log.debug('MiroTalk get meeting - Authorized', {
+    log.debug('BrainTechSolution get meeting - Authorized', {
         header: req.headers,
         body: req.body,
         meeting: meetingURL,
