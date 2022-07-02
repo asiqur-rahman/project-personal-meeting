@@ -53,16 +53,21 @@ const app = express();
 const Logger = require('./Logger');
 const log = new Logger('server');
 
-const isHttps = false; // must be the same on client.js
+const isHttps = true; // must be the same on client.js
 const port = process.env.PORT || 3000; // must be the same to client.js signalingServerPort
 
 let io, server, host;
 
 if (isHttps) {
     const fs = require('fs');
-    const options = {
-        key: fs.readFileSync(path.join(__dirname, '../ssl/key.pem'), 'utf-8'),
-        cert: fs.readFileSync(path.join(__dirname, '../ssl/cert.pem'), 'utf-8'),
+    // const options = {
+    //     key: fs.readFileSync(path.join(__dirname, '../ssl/key.pem'), 'utf-8'),
+    //     cert: fs.readFileSync(path.join(__dirname, '../ssl/cert.pem'), 'utf-8'),
+    // };
+    let options = {
+        cert: fs.readFileSync(path.join(__dirname, '../ssl/ssl.crt'), 'utf-8'),// fs.readFileSync('./ssl/example.crt');
+        ca: fs.readFileSync(path.join(__dirname, '../ssl/ssl.ca-bundle'), 'utf-8'), // fs.readFileSync('./ssl/example.ca-bundle');
+        key: fs.readFileSync(path.join(__dirname, '../ssl/ssl.key'), 'utf-8') // fs.readFileSync('./ssl/example.key');
     };
     server = https.createServer(options, app);
     host = 'https://' + 'localhost' + ':' + port;
@@ -70,7 +75,13 @@ if (isHttps) {
     server = http.createServer(app);
     host = 'http://' + 'localhost' + ':' + port;
 }
-
+// app.use((req, res, next) => {
+//     console.log("Called")
+//     if(req.protocol === 'http') {
+//       res.redirect(301, `https://${req.headers.host}${req.url}`);
+//     }
+//     next();
+//  });
 /*  
     Set maxHttpBufferSize from 1e6 (1MB) to 1e7 (10MB)
 */
