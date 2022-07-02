@@ -9,6 +9,7 @@
             "turn:ss-turn1.xirsys.com:80?transport=udp"
                 ],
         "TURN_USERNAME":"SJ8gV3mjmH00ay9K51k8xCOCA18d5XgjvKRDhULdXZ8iKC5WePZmhMVybSzcfbtKAAAAAGIVwe1wZWZpcmFiNTIz",
-        "TURN_PASSWORD":"033335be-9467-11ec-81c6-0242ac120004"
+        "TURN_PASSWORD":"033335be-9467-11ec-81c6-0242ac120004",
+        "SECRET_JWT":"BTS_Secret_By_Asiq"
     }
 } 

@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    
+    <% if (typeof metaTitle != 'undefined') { %>
+        <title><%= metaTitle %></title>
+        <meta property="og:title" content="<%= metaTitle %>" />
+    <% }%>
+
+    <% if (typeof metaDescription != 'undefined') { %>
+        <meta name="description" content="<%=metaDescription%>"/>
+        <meta property="og:description" content="<%=metaDescription%>" />
+    <% }%>
+
+    <% if (typeof metaKeywords != 'undefined') { %>
+        <meta name="keywords" content="<%=metaKeywords%>"/>
+    <% }%>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="description" content="">
+      <meta name="keyword" content="">
+      <meta name="author" content="Evrothemes">
+      <!-- Title -->
+      <title>V-Kyc | Datasoft</title>
+      <!--Bootstrap css-->
+      <link rel="stylesheet" href="/public/assetsForLandingPage/css/bootstrap.css">
+      <!--Font Awesome css-->
+      <link rel="stylesheet" href="/public/assetsForLandingPage/css/font-awesome.min.css">
+      <!--Flaticon css-->
+      <!-- <link rel="stylesheet" href="/public/assetsForLandingPage/flaticon/flaticon.css"> -->
+      <!--Magnific css-->
+      <!-- <link rel="stylesheet" href="/public/assetsForLandingPage/css/magnific-popup.css"> -->
+      <!--Owl-Carousel css-->
+      <link rel="stylesheet" href="/public/assetsForLandingPage/css/owl.carousel.min.css">
+      <link rel="stylesheet" href="/public/assetsForLandingPage/css/owl.theme.default.min.css">
+      <!--Animate css-->
+      <link rel="stylesheet" href="/public/assetsForLandingPage/css/animate.min.css">
+      <!--Slicknav css-->
+      <link rel="stylesheet" href="/public/assetsForLandingPage/css/slicknav.min.css">
+      <!--chosen css-->
+      <link rel="stylesheet" href="/public/assetsForLandingPage/css/chosen.min.css">
+      <!--Site Main Style css-->
+      <link rel="stylesheet" href="/public/assetsForLandingPage/css/style.css">
+      <!--Responsive css-->
+      <link rel="stylesheet" href="/public/assetsForLandingPage/css/responsive.css">
+    
+    <%- HeaderCss %>
+
+</head>
+
+<body>
+    <!-- <div class="loader_bg">
+        <div class="loader"></div>
+    </div> -->
+    <%- include ("./Partials/Header") %>
+    <%- body %>
+    <%- include ("./Partials/Footer") %>
+
+    <script>
+        
+    </script>
+    <%- FooterJs %>
+</body>
+
+</html>

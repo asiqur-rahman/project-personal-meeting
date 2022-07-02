@@ -10,6 +10,20 @@ const cors = require('cors');
 const path = require('path');
 const app = express();
 const Config = require('../../config.json');
+const PageRouter = require('../../src/routes/routes');
+
+//For set layouts of html view
+var expressLayouts = require('express-ejs-layouts');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.use(expressLayouts);
+
+app.use('/public', express.static('public'));
+app.use( '/assets', express.static( path.join( __dirname, 'assets' )));
+app.use('/files',express.static('files'));
+app.get('/layouts/', function(req, res) {
+    res.render('view');
+});
 
 const Logger = require('./Logger');
 const log = new Logger('server');
@@ -107,10 +121,13 @@ app.use((err, req, res, next) => {
     }
 });
 
-// all start from here
-app.get(['/'], (req, res) => {
-    res.sendFile(views.landing);
-});
+// Define All Route
+PageRouter(app);
+
+// // all start from here
+// app.get(['/'], (req, res) => {
+//     res.sendFile(views.landing);
+// });
 
 // braintechsolution about
 app.get(['/about'], (req, res) => {
