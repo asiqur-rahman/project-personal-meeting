@@ -1,45 +1,5 @@
-/*
-http://patorjk.com/software/taag/#p=display&f=ANSI%20Regular&t=Server
 
-███████ ███████ ██████  ██    ██ ███████ ██████  
-██      ██      ██   ██ ██    ██ ██      ██   ██ 
-███████ █████   ██████  ██    ██ █████   ██████  
-     ██ ██      ██   ██  ██  ██  ██      ██   ██ 
-███████ ███████ ██   ██   ████   ███████ ██   ██                                           
-
-dependencies: {
-    body-parser             : https://www.npmjs.com/package/body-parser
-    compression             : https://www.npmjs.com/package/compression
-    cors                    : https://www.npmjs.com/package/cors
-    crypto-js               : https://www.npmjs.com/package/crypto-js
-    dotenv                  : https://www.npmjs.com/package/dotenv
-    express                 : https://www.npmjs.com/package/express
-    ngrok                   : https://www.npmjs.com/package/ngrok
-    qs                      : https://www.npmjs.com/package/qs
-    @sentry/node            : https://www.npmjs.com/package/@sentry/node
-    @sentry/integrations    : https://www.npmjs.com/package/@sentry/integrations
-    socket.io               : https://www.npmjs.com/package/socket.io
-    swagger                 : https://www.npmjs.com/package/swagger-ui-express
-    uuid                    : https://www.npmjs.com/package/uuid
-    yamljs                  : https://www.npmjs.com/package/yamljs
-}
-*/
-
-/**
- * MiroTalk P2P - Server component
- *
- * @link    GitHub: https://github.com/miroslavpejic85/mirotalk
- * @link    Live demo: https://p2p.mirotalk.org or https://mirotalk.up.railway.app or https://mirotalk.herokuapp.com
- * @license For open source use: AGPLv3
- * @license For commercial or closed source, contact us at info.mirotalk@gmail.com
- * @author  Miroslav Pejic - miroslav.pejic.85@gmail.com
- * @version 1.0.0
- *
- */
-
-'use strict'; // https://www.w3schools.com/js/js_strict.asp
-
-require('dotenv').config();
+'use strict';
 
 const { Server } = require('socket.io');
 const http = require('http');
@@ -49,46 +9,40 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const app = express();
+const Config = require('../../config.json');
 
 const Logger = require('./Logger');
 const log = new Logger('server');
 
-const isHttps = true; // must be the same on client.js
-const port = process.env.PORT || 3000; // must be the same to client.js signalingServerPort
+const httpPort = Config.AppSettings.HTTP_PORT; 
+const httpsPort = Config.AppSettings.HTTPS_PORT;
 
-let io, server, host;
+let io, httpServer, httpsServer, httpHost, httpsHost;
+const fs = require('fs');
+let options = Config.AppSettings.IS_HTTPS_ENABLED?
+{
+    cert: fs.readFileSync(path.join(__dirname, '../ssl/ssl.crt'), 'utf-8'),
+    ca: fs.readFileSync(path.join(__dirname, '../ssl/ssl.ca-bundle'), 'utf-8'),
+    key: fs.readFileSync(path.join(__dirname, '../ssl/ssl.key'), 'utf-8')
+}:
+{
+    key: fs.readFileSync(path.join(__dirname, '../ssl/key.pem'), 'utf-8'),
+    cert: fs.readFileSync(path.join(__dirname, '../ssl/cert.pem'), 'utf-8'),
+};
 
-if (isHttps) {
-    const fs = require('fs');
-    // const options = {
-    //     key: fs.readFileSync(path.join(__dirname, '../ssl/key.pem'), 'utf-8'),
-    //     cert: fs.readFileSync(path.join(__dirname, '../ssl/cert.pem'), 'utf-8'),
-    // };
-    let options = {
-        cert: fs.readFileSync(path.join(__dirname, '../ssl/ssl.crt'), 'utf-8'),// fs.readFileSync('./ssl/example.crt');
-        ca: fs.readFileSync(path.join(__dirname, '../ssl/ssl.ca-bundle'), 'utf-8'), // fs.readFileSync('./ssl/example.ca-bundle');
-        key: fs.readFileSync(path.join(__dirname, '../ssl/ssl.key'), 'utf-8') // fs.readFileSync('./ssl/example.key');
-    };
-    server = https.createServer(options, app);
-    host = 'https://' + 'localhost' + ':' + port;
-} else {
-    server = http.createServer(app);
-    host = 'http://' + 'localhost' + ':' + port;
-}
-// app.use((req, res, next) => {
-//     console.log("Called")
-//     if(req.protocol === 'http') {
-//       res.redirect(301, `https://${req.headers.host}${req.url}`);
-//     }
-//     next();
-//  });
+httpsServer = https.createServer(options, app);
+httpsHost = 'https://' + 'localhost' + ':' + httpsPort;
+
+httpServer = http.createServer(app);
+httpHost = 'http://' + 'localhost' + ':' + httpPort;
+
 /*  
     Set maxHttpBufferSize from 1e6 (1MB) to 1e7 (10MB)
 */
 io = new Server({
     maxHttpBufferSize: 1e7,
     transports: ['websocket'],
-}).listen(server);
+}).listen(httpsServer);
 
 // console.log(io);
 
@@ -100,51 +54,15 @@ const swaggerDocument = yamlJS.load(path.join(__dirname + '/../api/swagger.yaml'
 // Api config
 const { v4: uuidV4 } = require('uuid');
 const apiBasePath = '/api/v1'; // api endpoint path
-const api_docs = host + apiBasePath + '/docs'; // api docs
-const api_key_secret = process.env.API_KEY_SECRET || 'mirotalk_default_secret';
-
-// Ngrok config
-const ngrok = require('ngrok');
-const ngrokEnabled = process.env.NGROK_ENABLED || false;
-const ngrokAuthToken = process.env.NGROK_AUTH_TOKEN;
+const api_docs = httpsHost + apiBasePath + '/docs'; // api docs
+const api_key_secret = Config.AppSettings.API_KEY_SECRET ;
 
 // Turn config
-const turnEnabled = process.env.TURN_ENABLED || false;
-const turnUrls = process.env.TURN_URLS;
-const turnUsername = process.env.TURN_USERNAME;
-const turnCredential = process.env.TURN_PASSWORD;
+const turnUrls = Config.AppSettings.TURN_URLS;
+const turnUsername = Config.AppSettings.TURN_USERNAME;
+const turnCredential = Config.AppSettings.TURN_PASSWORD;
 
-// Sentry config
-const Sentry = require('@sentry/node');
-const { CaptureConsole } = require('@sentry/integrations');
-const sentryEnabled = process.env.SENTRY_ENABLED || false;
-const sentryDSN = process.env.SENTRY_DSN;
-const sentryTracesSampleRate = process.env.SENTRY_TRACES_SAMPLE_RATE;
-
-// Slack API
-const CryptoJS = require('crypto-js');
-const qS = require('qs');
-const slackEnabled = process.env.SENTRY_ENABLED || false;
-const slackSigningSecret = process.env.SLACK_SIGNING_SECRET;
 const bodyParser = require('body-parser');
-
-// Setup sentry client
-if (sentryEnabled == 'true') {
-    Sentry.init({
-        dsn: sentryDSN,
-        integrations: [
-            new CaptureConsole({
-                // array of methods that should be captured
-                // defaults to ['log', 'info', 'warn', 'error', 'debug', 'assert']
-                levels: ['warn', 'error'],
-            }),
-        ],
-        // Set tracesSampleRate to 1.0 to capture 100%
-        // of transactions for performance monitoring.
-        // We recommend adjusting this value in production
-        tracesSampleRate: sentryTracesSampleRate,
-    });
-}
 
 // directory
 const dir = {
@@ -237,11 +155,6 @@ app.get('/join/*', (req, res) => {
     res.sendFile(views.client);
 });
 
-/**
-    MiroTalk API v1
-    For api docs we use: https://swagger.io/
-*/
-
 // api docs
 app.use(apiBasePath + '/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
@@ -270,42 +183,6 @@ app.post([apiBasePath + '/meeting'], (req, res) => {
     });
 });
 
-/*
-    MiroTalk Slack app v1
-    https://api.slack.com/authentication/verifying-requests-from-slack
-*/
-
-//Slack request meeting room endpoint
-app.post('/slack', (req, res) => {
-    if (slackEnabled != 'true') return res.end('`Under maintenance` - Please check back soon.');
-
-    log.debug('Slack', req.headers);
-
-    if (!slackSigningSecret) return res.end('`Slack Signing Secret is empty!`');
-
-    let slackSignature = req.headers['x-slack-signature'];
-    let requestBody = qS.stringify(req.body, { format: 'RFC1738' });
-    let timeStamp = req.headers['x-slack-request-timestamp'];
-    let time = Math.floor(new Date().getTime() / 1000);
-
-    // The request timestamp is more than five minutes from local time. It could be a replay attack, so let's ignore it.
-    if (Math.abs(time - timeStamp) > 300) return res.end('`Wrong timestamp` - Ignore this request.');
-
-    // Get Signature to compare it later
-    let sigBaseString = 'v0:' + timeStamp + ':' + requestBody;
-    let mySignature = 'v0=' + CryptoJS.HmacSHA256(sigBaseString, slackSigningSecret);
-
-    // Valid Signature return a meetingURL
-    if (mySignature == slackSignature) {
-        let host = req.headers.host;
-        let meetingURL = getMeetingURL(host);
-        log.debug('Slack', { meeting: meetingURL });
-        return res.end(meetingURL);
-    }
-    // Something wrong
-    return res.end('`Wrong signature` - Verification failed!');
-});
-
 /**
  * Request meeting room endpoint
  * @returns  entrypoint / Room URL for your meeting.
@@ -314,116 +191,41 @@ function getMeetingURL(host) {
     return 'http' + (host.includes('localhost') ? '' : 's') + '://' + host + '/join/' + uuidV4();
 }
 
-// end of MiroTalk API v1
-
 // not match any of page before, so 404 not found
 app.get('*', function (req, res) {
     res.sendFile(views.notFound);
 });
 
-/**
- * You should probably use a different stun-turn server
- * doing commercial stuff, also see:
- *
- * https://github.com/coturn/coturn
- * https://gist.github.com/zziuni/3741933
- * https://www.twilio.com/docs/stun-turn
- *
- * Check the functionality of STUN/TURN servers:
- * https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/
- */
 const iceServers = [];
 
-if (turnEnabled == 'true') {
-    iceServers.push(
-        {
-            urls: 'stun:stun.l.google.com:19302',
-        },
-        {
-            urls: turnUrls,
-            username: turnUsername,
-            credential: turnCredential,
-        },
-    );
-} else {
-    // My own As backup if not configured, please configure your in the .env file
-    iceServers.push(
-        {
-            urls: 'stun:stun.l.google.com:19302',
-        },
-        {
-            urls: 'turn:numb.viagenie.ca',
-            username: 'miroslav.pejic.85@gmail.com',
-            credential: 'mirotalkp2p',
-        },
-    );
-}
+iceServers.push(
+    {
+        urls: 'stun:stun.l.google.com:19302',
+    },
+    {
+        urls: turnUrls,
+        username: turnUsername,
+        credential: turnCredential,
+    },
+);
 
-/**
- * Expose server to external with https tunnel using ngrok
- * https://ngrok.com
- */
-async function ngrokStart() {
-    try {
-        await ngrok.authtoken(ngrokAuthToken);
-        await ngrok.connect(port);
-        let api = ngrok.getApi();
-        let data = await api.listTunnels();
-        let pu0 = data.tunnels[0].public_url;
-        let pu1 = data.tunnels[1].public_url;
-        let tunnelHttps = pu0.startsWith('https') ? pu0 : pu1;
-        // server settings
-        log.debug('settings', {
-            iceServers: iceServers,
-            ngrok: {
-                ngrok_enabled: ngrokEnabled,
-                ngrok_token: ngrokAuthToken,
-            },
-            server: host,
-            server_tunnel: tunnelHttps,
-            api_docs: api_docs,
-            api_key_secret: api_key_secret,
-            sentry_enabled: sentryEnabled,
-            node_version: process.versions.node,
-        });
-    } catch (err) {
-        log.warn('[Error] ngrokStart', err.body);
-        process.exit(1);
-    }
-}
-
-/**
- * Start Local Server with ngrok https tunnel (optional)
- */
-server.listen(port, null, () => {
-    log.debug(
-        `%c
-
-	███████╗██╗ ██████╗ ███╗   ██╗      ███████╗███████╗██████╗ ██╗   ██╗███████╗██████╗ 
-	██╔════╝██║██╔════╝ ████╗  ██║      ██╔════╝██╔════╝██╔══██╗██║   ██║██╔════╝██╔══██╗
-	███████╗██║██║  ███╗██╔██╗ ██║█████╗███████╗█████╗  ██████╔╝██║   ██║█████╗  ██████╔╝
-	╚════██║██║██║   ██║██║╚██╗██║╚════╝╚════██║██╔══╝  ██╔══██╗╚██╗ ██╔╝██╔══╝  ██╔══██╗
-	███████║██║╚██████╔╝██║ ╚████║      ███████║███████╗██║  ██║ ╚████╔╝ ███████╗██║  ██║
-	╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝      ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═╝ started...
-
-	`,
-        'font-family:monospace',
-    );
-
-    // https tunnel
-    if (ngrokEnabled == 'true' && isHttps === false) {
-        ngrokStart();
-    } else {
-        // server settings
-        log.debug('settings', {
-            iceServers: iceServers,
-            server: host,
-            api_docs: api_docs,
-            api_key_secret: api_key_secret,
-            sentry_enabled: sentryEnabled,
-            node_version: process.versions.node,
-        });
-    }
+httpServer.listen(httpPort, null, () => {
+    // server settings
+    log.debug('For HTTP', {
+        server: httpHost,
+    });
+});
+httpsServer.listen(httpsPort, null, () => {
+    // server settings
+    log.debug('For HTTPS', {
+        server: httpsHost,
+    });
+    log.debug('Settings ', {
+        iceServers: iceServers,
+        api_docs: api_docs,
+        api_key_secret: api_key_secret,
+        node_version: process.versions.node,
+    });
 });
 
 /**

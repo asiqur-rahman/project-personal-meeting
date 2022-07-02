@@ -1,0 +1,14 @@
+{
+    "AppSettings": {
+        "HTTP_PORT":3333,
+        "IS_HTTPS_ENABLED":false,
+        "HTTPS_PORT":3334,
+        "API_KEY_SECRET":"BTS_Secret_By_Asiq",
+        "TURN_URLS":[
+            "turn:ss-turn1.xirsys.com:80?transport=udp",
+            "turn:ss-turn1.xirsys.com:80?transport=udp"
+                ],
+        "TURN_USERNAME":"SJ8gV3mjmH00ay9K51k8xCOCA18d5XgjvKRDhULdXZ8iKC5WePZmhMVybSzcfbtKAAAAAGIVwe1wZWZpcmFiNTIz",
+        "TURN_PASSWORD":"033335be-9467-11ec-81c6-0242ac120004"
+    }
+} 

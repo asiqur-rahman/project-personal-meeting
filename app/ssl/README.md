@@ -1,7 +1,3 @@
-## Expose MiroTalk on HTTPS
-
-![mirotalk-https](https.png)
-
 1. Generate a `self-signed certificate`
 
 ```bash
