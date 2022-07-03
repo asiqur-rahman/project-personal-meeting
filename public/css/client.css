@@ -147,12 +147,8 @@ body {
     background: rgba(0, 0, 0, 0.7);
 }
 #loadingDiv h1 {
-    font-size: 60px;
-    font-family: 'Comfortaa';
-}
-#loadingDiv pre {
-    padding: 5px;
-    font-family: 'Comfortaa';
+    font-size: 50px;
+    /* font-family: 'Comfortaa'; */
 }
 
 /*--------------------------------------------------------------
