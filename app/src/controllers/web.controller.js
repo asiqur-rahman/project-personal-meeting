@@ -18,7 +18,7 @@ module.exports.joinRoomGet = async(req, res, next) => {
         metaTitle: 'Home | Meeting | Brain Tech Solution',
         metaDescription:'Home | Meeting | Brain Tech Solution'
     };
-    return res.render('Conference/client',{layout: false});
+    return res.render('Conference/index',{layout: false});
 };
 
 module.exports.thankYou = async(req, res, next) => {

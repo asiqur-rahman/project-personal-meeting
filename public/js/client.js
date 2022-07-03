@@ -65,9 +65,9 @@ let callStartTime;
 let callElapsedTime;
 let recStartTime;
 let recElapsedTime;
-let braintechsolutionTheme = 'dark'; // dark - grey ...
-let braintechsolutionBtnsBar = 'vertical'; // vertical - horizontal
-let swalBackground = 'rgba(0, 0, 0, 0.7)'; // black - #16171b - transparent ...
+let braintechsolutionTheme = 'grey'; // dark - grey ...
+let braintechsolutionBtnsBar = 'horizontal'; // vertical - horizontal
+let swalBackground = 'rgba(0, 0, 0, 0.6)'; // black - #16171b - transparent ...
 let peerGeo;
 let peerConnection;
 let myPeerName = getPeerName();
@@ -727,6 +727,9 @@ function whoAreYou() {
         allowEscapeKey: false,
         background: swalBackground,
         position: 'center',
+        inputAttributes: {
+            id: "whoAreYou",
+        },
         // imageAlt: 'braintechsolution-name',
         // imageUrl: welcomeImg,
         title: 'Enter your name',
@@ -791,6 +794,7 @@ function whoAreYouJoin() {
     setPeerChatAvatarImgName('right', myPeerName);
     joinToChannel();
     setTheme(braintechsolutionTheme);
+    handleBodyOnMouseMove();
 }
 
 /**
@@ -1402,7 +1406,7 @@ function loadLocalMedia(stream) {
     setupMySettings();
     setupVideoUrlPlayer();
     startCountTime();
-    handleBodyOnMouseMove();
+    // handleBodyOnMouseMove();
     handleVideoPlayerFs('myVideo', 'myVideoFullScreenBtn');
     handleFileDragAndDrop('myVideo', myPeerId, true);
     handleVideoToImg('myVideo', 'myVideoToImgBtn');
@@ -2839,7 +2843,7 @@ function showButtonsBarAndMenu() {
         (isMobileDevice && isCaptionBoxVisible) ||
         (isMobileDevice && isMySettingsVisible)
     )
-        return;
+    return;
     toggleClassElements('statusMenu', 'inline');
     buttonsBar.style.display = 'flex';
     isButtonsVisible = true;
@@ -2847,8 +2851,8 @@ function showButtonsBarAndMenu() {
         toggleClassElements('statusMenu', 'none');
         buttonsBar.style.display = 'none';
         isButtonsVisible = false;
-    }, 10000);
-}
+    }, 15000);
+};
 
 /**
  * Copy room url to clipboard and share it with navigator share if supported

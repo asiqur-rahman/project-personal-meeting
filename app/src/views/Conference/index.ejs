@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-
-        <!-- Title and Icon -->
-
         
+        <meta property="og:type" content="app-webrtc" />
+        <meta property="og:site_name" content="BrainTechSolution" />
+
         <% if (typeof metaTitle != 'undefined') { %>
             <title><%= metaTitle %></title>
             <meta property="og:title" content="<%= metaTitle %>" />
@@ -29,14 +29,6 @@
             name="keywords"
             content="webrtc, webrtc stun, webrtc turn, video meeting, video chat, multi video chat, peer to peer, p2p, zoom"
         />
-
-        <!-- https://ogp.me -->
-
-        <meta property="og:type" content="app-webrtc" />
-        <meta property="og:site_name" content="BrainTechSolution" />
-        <meta property="og:title" content="Click the link to join this call." />
-        <meta property="og:description" content="Free WebRTC browser-based video call." />
-        <!-- <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon.png" /> -->
 
         <!-- StyleSheet -->
 
@@ -67,14 +59,10 @@
         <div id="loadingDiv" class="center pulsate">
             <h1>Loading...</h1>
             <pre>
-Please allow the camera or microphone
-access to use this app.
+                Please allow the camera or microphone
+                access to use this app.
             </pre>
         </div>
-
-        <!-- Start buttons bar
-        https://fontawesome.com/icons?d=gallery
-        -->
 
         <div id="buttonsBar" class="fadein">
             <button id="shareRoomBtn" class="fas fa-users"></button>
