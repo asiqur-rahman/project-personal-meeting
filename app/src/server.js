@@ -20,18 +20,17 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
 
-app.use('/public', express.static('public'));
-app.use( '/assets', express.static( path.join( __dirname, 'assets' )));
-app.use('/files',express.static('files'));
+app.use('/public', express.static(path.join( __dirname, '../../public' )));
 app.get('/layouts/', function(req, res) {
     res.render('view');
 });
+
+app.use(favicon(path.join(__dirname, '../../public/images', 'bts_icon.png')));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({limit: '10mb'}));
 
-app.use(favicon(path.join(__dirname, '../../public/images', 'bts_icon.png')));
 
 const Logger = require('./Logger');
 const log = new Logger('server');
