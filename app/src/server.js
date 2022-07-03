@@ -46,7 +46,7 @@ const fs = require('fs');
 */
 io = new Server({
     maxHttpBufferSize: 1e7,
-    transports: ['websocket','polling'],
+    transports: ['polling'],
 }).listen(server);
 
 // Swagger config
