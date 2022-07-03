@@ -40,7 +40,7 @@ const httpsPort = Config.AppSettings.HTTPS_PORT;
 
 let io, httpServer, httpsServer, httpHost, httpsHost;
 const fs = require('fs');
-let options = Config.AppSettings.IS_HTTPS_ENABLED?
+let options = Config.AppSettings.MODE_PRODUCTION?
 {
     cert: fs.readFileSync(path.join(__dirname, '../ssl/ssl.crt'), 'utf-8'),
     ca: fs.readFileSync(path.join(__dirname, '../ssl/ssl.ca-bundle'), 'utf-8'),
@@ -64,8 +64,6 @@ io = new Server({
     maxHttpBufferSize: 1e7,
     transports: ['websocket'],
 }).listen(httpsServer);
-
-// console.log(io);
 
 // Swagger config
 const yamlJS = require('yamljs');
@@ -130,11 +128,6 @@ app.use((err, req, res, next) => {
 // Define All Route
 PageRouter(app);
 
-// // all start from here
-// app.get(['/'], (req, res) => {
-//     res.sendFile(views.landing);
-// });
-
 // set new room name and join
 app.get(['/newcall'], (req, res) => {
     res.sendFile(views.newCall);
@@ -166,11 +159,6 @@ app.get(['/privacy'], (req, res) => {
 //         }
 //     }
 //     res.redirect('/');
-// });
-
-// Join Room *
-// app.get('/join/*', (req, res) => {
-//     res.sendFile(views.client);
 // });
 
 // api docs
