@@ -35,8 +35,8 @@ app.use(bodyParser.json({limit: '10mb'}));
 const Logger = require('./Logger');
 const log = new Logger('server');
 
-const httpPort = Config.AppSettings.HTTP_PORT; 
-const httpsPort = Config.AppSettings.HTTPS_PORT;
+const httpPort = Number(process.env.PORT || Config.AppSettings.HTTP_PORT); 
+const httpsPort = Number(process.env.PORT || Config.AppSettings.HTTPS_PORT);
 
 let io, httpServer, httpsServer, httpHost, httpsHost;
 const fs = require('fs');
