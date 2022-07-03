@@ -2,8 +2,6 @@
 'use strict';
 
 const { Server } = require('socket.io');
-const http = require('http');
-const https = require('https');
 const compression = require('compression');
 const express = require('express');
 const cors = require('cors');
@@ -13,6 +11,9 @@ const Config = require('../../config.json');
 const PageRouter = require('../src/routes/routes');
 const bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
+
+const server = require('http').Server(app);
+// const io = require('socket.io')(server);
 
 //For set layouts of html view
 var expressLayouts = require('express-ejs-layouts');
@@ -35,35 +36,18 @@ app.use(bodyParser.json({limit: '10mb'}));
 const Logger = require('./Logger');
 const log = new Logger('server');
 
-const httpPort = Number(process.env.PORT || Config.AppSettings.HTTP_PORT); 
-const httpsPort = Number(process.env.PORT || Config.AppSettings.HTTPS_PORT);
+const httpPort = Number(Config.AppSettings.HTTP_PORT);
 
-let io, httpServer, httpsServer, httpHost, httpsHost;
+let io,httpHost, httpsHost;
 const fs = require('fs');
-let options = Config.AppSettings.MODE_PRODUCTION?
-{
-    cert: fs.readFileSync(path.join(__dirname, '../ssl/ssl.crt'), 'utf-8'),
-    ca: fs.readFileSync(path.join(__dirname, '../ssl/ssl.ca-bundle'), 'utf-8'),
-    key: fs.readFileSync(path.join(__dirname, '../ssl/ssl.key'), 'utf-8')
-}:
-{
-    key: fs.readFileSync(path.join(__dirname, '../ssl/key.pem'), 'utf-8'),
-    cert: fs.readFileSync(path.join(__dirname, '../ssl/cert.pem'), 'utf-8'),
-};
-
-httpsServer = https.createServer(options, app);
-httpsHost = 'https://' + 'localhost' + ':' + httpsPort;
-
-httpServer = http.createServer(app);
-httpHost = 'http://' + 'localhost' + ':' + httpPort;
 
 /*  
     Set maxHttpBufferSize from 1e6 (1MB) to 1e7 (10MB)
 */
 io = new Server({
     maxHttpBufferSize: 1e7,
-    transports: ['websocket'],
-}).listen(httpsServer);
+    transports: ['websocket','polling'],
+}).listen(server);
 
 // Swagger config
 const yamlJS = require('yamljs');
@@ -215,24 +199,25 @@ iceServers.push(
     },
 );
 
-httpServer.listen(httpPort, null, () => {
+server.listen(httpPort, null, () => {
+    console.log(`Listening on port for http ${httpPort}`)
     // server settings
     log.debug('For HTTP', {
         server: httpHost,
     });
 });
-httpsServer.listen(httpsPort, null, () => {
-    // server settings
-    log.debug('For HTTPS', {
-        server: httpsHost,
-    });
-    log.debug('Settings ', {
-        iceServers: iceServers,
-        api_docs: api_docs,
-        api_key_secret: api_key_secret,
-        node_version: process.versions.node,
-    });
-});
+// httpsServer.listen(httpsPort, null, () => {
+//     // server settings
+//     log.debug('For HTTPS', {
+//         server: httpsHost,
+//     });
+//     log.debug('Settings ', {
+//         iceServers: iceServers,
+//         api_docs: api_docs,
+//         api_key_secret: api_key_secret,
+//         node_version: process.versions.node,
+//     });
+// });
 
 /**
  * On peer connected

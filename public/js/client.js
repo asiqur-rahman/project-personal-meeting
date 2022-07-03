@@ -624,7 +624,7 @@ function initClientPeer() {
     console.log('Connecting to signaling server');
 
     // Disable the HTTP long-polling transport
-    signalingSocket = io({ transports: ['websocket'] });
+    signalingSocket = io({ transports: ['websocket','polling'] });
 
     const transport = signalingSocket.io.engine.transport.name; // in most cases, "polling"
     console.log('Connection transport', transport);

@@ -2,7 +2,6 @@
     "AppSettings": {
         "MODE_PRODUCTION":false,
         "HTTP_PORT":3000,
-        "HTTPS_PORT":3001,
         "API_KEY_SECRET":"BTS_Secret_By_Asiq",
         "TURN_URLS":[
             "turn:ss-turn1.xirsys.com:80?transport=udp",
