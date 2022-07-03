@@ -77,9 +77,9 @@ const api_docs = httpsHost + apiBasePath + '/docs'; // api docs
 const api_key_secret = Config.AppSettings.API_KEY_SECRET ;
 
 // Turn config
-const turnUrls = Config.AppSettings.TURN_URLS;
-const turnUsername = Config.AppSettings.TURN_USERNAME;
-const turnCredential = Config.AppSettings.TURN_PASSWORD;
+const turnUrls = Config.AppSettings.MODE_PRODUCTION ? Config.AppSettings.TURN_URLS : 'turn:numb.viagenie.ca' ;
+const turnUsername = Config.AppSettings.MODE_PRODUCTION ? Config.AppSettings.TURN_USERNAME : 'webrtc@live.com';
+const turnCredential = Config.AppSettings.MODE_PRODUCTION ? Config.AppSettings.TURN_PASSWORD : 'muazkh';
 
 // directory
 const dir = {
