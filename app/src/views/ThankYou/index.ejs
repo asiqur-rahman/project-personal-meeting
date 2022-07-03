@@ -1,0 +1,23 @@
+<!doctype html>
+<title>Meeting Room Error</title>
+<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' http://* https://*; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://* https://* ">
+<style>
+  body { text-align: center; padding: 150px; }
+  h1 { font-size: 45px; }
+  body { font: 20px Helvetica, sans-serif; color: #333; }
+  article { display: block; text-align: left; width: 650px; margin: 0 auto; }
+  a { color: #dc8100; text-decoration: none; }
+  a:hover { color: #333; text-decoration: none; }
+</style>
+
+<article>
+    <h1>Thank you !</h1>
+    <div>
+      <%if (locals.errorData) {%>
+        <p><%-errorData%></p>
+      <%}else{%>
+        <p>The requested meeting was over. Please try to contact with host again.</p>
+      <%}%>
+      <p>&mdash; <a href="/">Go Home Page</a></p>
+    </div>
+</article>

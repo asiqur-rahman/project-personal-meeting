@@ -4,9 +4,19 @@
 
         <!-- Title and Icon -->
 
-        <title>BrainTechSolution WebRTC Video call, Chat Room & Screen Sharing.</title>
-        <link rel="shortcut icon" href="/pulic/images/logo.svg" />
-        <link rel="apple-touch-icon" href="/pulic/images/logo.svg" />
+        
+        <% if (typeof metaTitle != 'undefined') { %>
+            <title><%= metaTitle %></title>
+            <meta property="og:title" content="<%= metaTitle %>" />
+        <% }%>
+
+        <% if (typeof metaDescription != 'undefined') { %>
+            <meta name="description" content="<%=metaDescription%>"/>
+            <meta property="og:description" content="<%=metaDescription%>" />
+        <% }%>
+
+        <!-- <link rel="shortcut icon" href="/pulic/images/logo.svg" />
+        <link rel="apple-touch-icon" href="/pulic/images/logo.svg" /> -->
 
         <!-- Meta Information -->
 
@@ -14,10 +24,6 @@
         <meta
             name="viewport"
             content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-        />
-        <meta
-            name="description"
-            content="BrainTechSolution powered by WebRTC, Real-time Simple Secure Fast video calls, chat and screen sharing capabilities in the browser, from your mobile or desktop."
         />
         <meta
             name="keywords"
@@ -30,9 +36,7 @@
         <meta property="og:site_name" content="BrainTechSolution" />
         <meta property="og:title" content="Click the link to join this call." />
         <meta property="og:description" content="Free WebRTC browser-based video call." />
-        <meta property="og:image" content="https://p2p.braintechsolution.com/images/preview.png" />
-        <meta property="og:url" content="https://p2p.braintechsolution.org" />
-        <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon.png" />
+        <!-- <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon.png" /> -->
 
         <!-- StyleSheet -->
 
@@ -90,11 +94,6 @@ access to use this app.
             <button id="leaveRoomBtn" class="fas fa-right-from-bracket"></button>
         </div>
         <!-- End left buttons -->
-
-        <!-- Start chat room 
-        https://codepen.io/sajadhsm/pen/odaBdd
-        https://getemoji.com
-        -->
 
         <section id="msgerDraggable" class="msger-draggable fadein">
             <section id="msger" class="msger">

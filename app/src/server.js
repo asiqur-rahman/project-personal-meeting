@@ -10,8 +10,9 @@ const cors = require('cors');
 const path = require('path');
 const app = express();
 const Config = require('../../config.json');
-const PageRouter = require('../../src/routes/routes');
+const PageRouter = require('../src/routes/routes');
 const bodyParser = require('body-parser');
+var favicon = require('serve-favicon');
 
 //For set layouts of html view
 var expressLayouts = require('express-ejs-layouts');
@@ -29,6 +30,8 @@ app.get('/layouts/', function(req, res) {
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({limit: '10mb'}));
+
+app.use(favicon(path.join(__dirname, '../../public/images', 'bts_icon.png')));
 
 const Logger = require('./Logger');
 const log = new Logger('server');

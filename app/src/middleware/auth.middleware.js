@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const Config = require('../../config.json');
+const Config = require('../../../config.json');
 
 const auth = (...roles) => {
     return async function (req, res, next) {
