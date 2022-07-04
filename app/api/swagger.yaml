@@ -1,11 +1,11 @@
 swagger: '2.0'
 
 info:
-    title: BrainTechSolution API
-    description: API description for external applications that integrates with BrainTechSolution.
+    title: BrainTechSolution Meeting API
+    description: API description for external applications that integrates with BrainTechSolution Meeting.
     version: 1.0.0
 
-basePath: /api/v1
+# basePath: /api/docs
 
 schemes:
     - https

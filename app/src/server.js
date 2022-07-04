@@ -56,9 +56,11 @@ const swaggerDocument = yamlJS.load(path.join(__dirname + '/../api/swagger.yaml'
 
 // Api config
 const { v4: uuidV4 } = require('uuid');
-const apiBasePath = '/api/v1'; // api endpoint path
-const api_docs = httpsHost + apiBasePath + '/docs'; // api docs
+const apiBasePath = '/api'; // api endpoint path
+const api_docs = apiBasePath + '/docs'; // api docs
 const api_key_secret = Config.AppSettings.API_KEY_SECRET ;
+// Api docs
+// app.use(api_docs, swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Turn config
 const turnUrls = Config.AppSettings.MODE_PRODUCTION ? Config.AppSettings.TURN_URLS : 'turn:numb.viagenie.ca' ;
@@ -146,8 +148,6 @@ app.get(['/privacy'], (req, res) => {
 //     res.redirect('/');
 // });
 
-// api docs
-app.use(apiBasePath + '/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // request meeting room endpoint
 app.post([apiBasePath + '/meeting'], (req, res) => {
@@ -182,11 +182,6 @@ function getMeetingURL(host) {
     return 'http' + (host.includes('localhost') ? '' : 's') + '://' + host + '/join/' + uuidV4();
 }
 
-// not match any of page before, so 404 not found
-// app.get('*', function (req, res) {
-//     res.sendFile(views.notFound);
-// });
-
 const iceServers = [];
 
 iceServers.push(
@@ -203,8 +198,8 @@ iceServers.push(
 server.listen(httpPort, null, () => {
     // server settings
     log.debug('Settings ', {
-        port: `Listening on port for http ${httpPort}`,
         iceServers: iceServers,
+        port: httpPort,
         // api_docs: api_docs,
         // api_key_secret: api_key_secret,
         node_version: process.versions.node,
@@ -219,6 +214,7 @@ if(Config.AppSettings.SEQUILIZE_SYNC){
         console.log(error)
     }
 }
+
 // force: true will drop the table if it already exists
 if(Config.AppSettings.SEQUILIZE_SYNC_FORCE){
     try{
