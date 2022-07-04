@@ -21,10 +21,6 @@ module.exports = (sequelize, Sequelize) => {
         notNull:{ args: true, msg: "Code cannot be empty !!"}
       }
     },
-    description: {
-      type: Sequelize.STRING(),
-      allowNull:true,
-    },
     isActive: {
       type: Sequelize.BOOLEAN(),
       allowNull:false,

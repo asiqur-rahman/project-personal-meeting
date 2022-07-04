@@ -18,16 +18,12 @@ module.exports = (sequelize, Sequelize) => {
       allowNull:{ args: false, msg: "Code cannot be empty !!"},
       unique:{ args: true, msg: "Code Already Used"},
     },
-    secret: {
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
-      unique:true,
-      allowNull: false,
-    },
-    description: {
-      type: Sequelize.STRING(),
-      allowNull:true,
-    },
+    // secret: {
+    //   type: Sequelize.UUID,
+    //   defaultValue: Sequelize.UUIDV4,
+    //   unique:true,
+    //   allowNull: false,
+    // },
     isActive: {
       type: Sequelize.BOOLEAN(),
       allowNull:false,
