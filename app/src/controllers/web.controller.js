@@ -18,7 +18,7 @@ module.exports.joinRoomGet = async(req, res, next) => {
         metaTitle: 'Room | Brain Tech Solution',
         metaDescription:'Room | Brain Tech Solution'
     };
-    return res.render('Room/index',{layout: false});
+    return res.render('Room/client',{layout: false});
 };
 
 module.exports.error = async(req, res, next) => {

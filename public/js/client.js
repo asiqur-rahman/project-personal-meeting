@@ -5630,17 +5630,13 @@ function showAbout() {
     Swal.fire({
         background: swalBackground,
         position: 'center',
-        title: '<strong>WebRTC P2P</strong>',
-        imageAlt: 'braintechsolution-about',
-        imageUrl: aboutImg,
+        title: '<strong>Brain Tech Solution</strong>',
+        // imageAlt: 'braintechsolution-about',
+        // imageUrl: aboutImg,
         html: `
         <br/>
         <div id="about">
-            <b><a href="https://github.com/miroslavpejic85/braintechsolution" target="_blank">Open Source</a></b> project
-            <br/><br/>
-            <button class="pulsate" onclick="window.open('https://github.com/sponsors/miroslavpejic85?o=esb')"><i class="fas fa-heart" ></i>&nbsp;Sponsor</button>
-            <br /><br />
-            Author:<a href="https://www.linkedin.com/in/miroslav-pejic-976a07101/" target="_blank"> Miroslav Pejic</a>
+            Author:<a href="https://developer.braintechsolution.com/" target="_blank"> Md. Asiqur Rahman Khan</a>
         </div>
         `,
         showClass: {
