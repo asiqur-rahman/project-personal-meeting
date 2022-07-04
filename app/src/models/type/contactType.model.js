@@ -13,7 +13,7 @@ module.exports = (sequelize, Sequelize) => {
         notNull:{ args: true, msg: "Name cannot be empty !!"}
       }
     },
-    Code: {
+    code: {
       type: Sequelize.STRING(),
       allowNull:false,
       unique:true,

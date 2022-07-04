@@ -205,29 +205,73 @@ server.listen(httpPort, null, () => {
     log.debug('Settings ', {
         port: `Listening on port for http ${httpPort}`,
         iceServers: iceServers,
-        api_docs: api_docs,
-        api_key_secret: api_key_secret,
+        // api_docs: api_docs,
+        // api_key_secret: api_key_secret,
         node_version: process.versions.node,
     });
 });
 
-// db.sequelize.sync();
-// force: true will drop the table if it already exists
-try{
-  db.sequelize.sync({ force: true }).then(async () => {
-    console.log('Drop and Resync Database with { force: true }');
-    await initial();
-  });
+if(Config.AppSettings.SEQUILIZE_SYNC){
+    try{
+        db.sequelize.sync();
+    }
+    catch (error) {
+        console.log(error)
+    }
 }
-catch (error) {
-  console.log(error)
+// force: true will drop the table if it already exists
+if(Config.AppSettings.SEQUILIZE_SYNC_FORCE){
+    try{
+        db.sequelize.sync({ force: true }).then(async () => {
+          console.log('Drop and Resync Database with { force: true }');
+          await initial();
+        });
+    }
+    catch (error) {
+        console.log(error)
+    }
 }
 
 function initial() {
+
+    //#region AddressType
+    db.addressType.create({
+        name: "Present",
+        code: enumm.addressType.Present
+    });
     db.addressType.create({
         name: "Permanent",
-        code: enumm.attendanceType.In
+        code: enumm.addressType.Permanent
     });
+    db.addressType.create({
+        name: "Office",
+        code: enumm.addressType.Office
+    });
+    db.addressType.create({
+        name: "Home",
+        code: enumm.addressType.Home
+    });
+    //#endregion
+
+    //#region ContactType
+    db.contactType.create({
+        name: "Mobile",
+        code: enumm.contactType.Mobile
+    });
+    db.contactType.create({
+        name: "Phone",
+        code: enumm.contactType.Phone
+    });
+    db.contactType.create({
+        name: "Fax",
+        code: enumm.contactType.Fax
+    });
+    db.contactType.create({
+        name: "Email",
+        code: enumm.contactType.Email
+    });
+    //#endregion
+    
 }
 
 /**

@@ -14,8 +14,18 @@
     }
 
     module.exports.addressType={
-        Created: '1',
-        Out: '2',
-        BreakStart: '3',
-        BreakEnd: '4'
+        Present: '1',
+        Permanent: '2',
+        Office: '3',
+        Home: '4',
+        Bussiness: '5',
+        Billing: '6',
+        Shipping: '7'
+    }
+
+    module.exports.contactType={
+        Mobile: '1',
+        Phone: '2',
+        Email: '3',
+        Fax: '4'
     }

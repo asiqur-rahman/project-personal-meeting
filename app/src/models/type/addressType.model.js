@@ -13,13 +13,16 @@ module.exports = (sequelize, Sequelize) => {
         notNull:{ args: true, msg: "Name cannot be empty !!"}
       }
     },
-    Code: {
+    code: {
       type: Sequelize.STRING(),
-      allowNull:false,
+      allowNull:{ args: false, msg: "Code cannot be empty !!"},
+      unique:{ args: true, msg: "Code Already Used"},
+    },
+    secret: {
+      type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV4,
       unique:true,
-      validate:{
-        notNull:{ args: true, msg: "Code cannot be empty !!"}
-      }
+      allowNull: false,
     },
     description: {
       type: Sequelize.STRING(),
