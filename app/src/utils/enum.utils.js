@@ -13,22 +13,9 @@
         Manager:'5'
     }
 
-    module.exports.orderType={
+    module.exports.addressType={
         Created: '1',
         Out: '2',
         BreakStart: '3',
         BreakEnd: '4'
-    }
-
-    module.exports.paymentType={
-        Cash: '1',
-        Cheque: '2',
-        BankTransfer: '3'
-    }
-
-    module.exports.notification={
-        Error: 'errorMsg',
-        Info: 'infoMsg',
-        Warning: 'warMsg',
-        Success: 'succMsg'
     }

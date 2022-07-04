@@ -7,9 +7,9 @@
         "DIALECT":"mysql",
         "POOL":{
             "MAX":5,
-            "MIN":5,
-            "ACQUIRE":5,
-            "IDLE":5
+            "MIN":0,
+            "ACQUIRE":30000,
+            "IDLE":10000
         }
     },
     "AppSettings": {

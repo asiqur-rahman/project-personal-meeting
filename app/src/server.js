@@ -11,9 +11,9 @@ const Config = require('../../config.json');
 const PageRouter = require('../src/routes/routes');
 const bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
-
+const db = require("../src/models/model");
+const enumm = require('../src/utils/enum.utils');
 const server = require('http').Server(app);
-// const io = require('socket.io')(server);
 
 //For set layouts of html view
 var expressLayouts = require('express-ejs-layouts');
@@ -200,8 +200,16 @@ iceServers.push(
     },
 );
 
-//------------------- database
-const db = require("../src/models/model");
+server.listen(httpPort, null, () => {
+    // server settings
+    log.debug('Settings ', {
+        port: `Listening on port for http ${httpPort}`,
+        iceServers: iceServers,
+        api_docs: api_docs,
+        api_key_secret: api_key_secret,
+        node_version: process.versions.node,
+    });
+});
 
 // db.sequelize.sync();
 // force: true will drop the table if it already exists
@@ -215,28 +223,12 @@ catch (error) {
   console.log(error)
 }
 
-server.listen(httpPort, null, () => {
-    // server settings
-    log.debug('Settings ', {
-        port: `Listening on port for http ${httpPort}`,
-        iceServers: iceServers,
-        api_docs: api_docs,
-        api_key_secret: api_key_secret,
-        node_version: process.versions.node,
+function initial() {
+    db.addressType.create({
+        name: "Permanent",
+        code: enumm.attendanceType.In
     });
-});
-// httpsServer.listen(httpsPort, null, () => {
-//     // server settings
-//     log.debug('For HTTPS', {
-//         server: httpsHost,
-//     });
-//     log.debug('Settings ', {
-//         iceServers: iceServers,
-//         api_docs: api_docs,
-//         api_key_secret: api_key_secret,
-//         node_version: process.versions.node,
-//     });
-// });
+}
 
 /**
  * On peer connected
