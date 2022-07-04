@@ -45,9 +45,7 @@ module.exports = function (app) {
     
     // 404 error
     app.all('*', (req, res, next) => {
-        res.render('Pages/pages-404', {
-            layout: false
-          });
+        res.render('Error/index', {layout: false});
     });
 
     app.use(errorMiddleware);

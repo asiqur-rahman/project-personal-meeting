@@ -18,14 +18,14 @@ module.exports.joinRoomGet = async(req, res, next) => {
         metaTitle: 'Home | Meeting | Brain Tech Solution',
         metaDescription:'Home | Meeting | Brain Tech Solution'
     };
-    return res.render('Conference/index',{layout: false});
+    return res.render('Meeting/index',{layout: false});
 };
 
-module.exports.thankYou = async(req, res, next) => {
+module.exports.error = async(req, res, next) => {
     console.log(req.body)
     res.locals = { 
         metaTitle: 'Home | Meeting | Brain Tech Solution',
         metaDescription:'Home | Meeting | Brain Tech Solution'
     };
-    return res.render('ThankYou/index',{layout: false});
+    return res.render('Error/index',{layout: false});
 };

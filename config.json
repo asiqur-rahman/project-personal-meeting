@@ -24,6 +24,6 @@
         "TURN_PASSWORD":"033335be-9467-11ec-81c6-0242ac120004",
         "SECRET_JWT":"BTS_Secret_By_Asiq",
         "SEQUILIZE_SYNC":false,
-        "SEQUILIZE_SYNC_FORCE":true
+        "SEQUILIZE_SYNC_FORCE":false
     }
 } 
