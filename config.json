@@ -1,4 +1,17 @@
 {
+    "DB_CONFIG": {
+        "USER":"drtechma_test",
+        "PASS":"drtechma_test",
+        "DBNAME":"drtechma_test",
+        "HOST":"braintechsolution.com",
+        "DIALECT":"mysql",
+        "POOL":{
+            "MAX":5,
+            "MIN":5,
+            "ACQUIRE":5,
+            "IDLE":5
+        }
+    },
     "AppSettings": {
         "MODE_PRODUCTION":false,
         "HTTP_PORT":3000,

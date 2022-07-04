@@ -109,6 +109,7 @@ app.use((err, req, res, next) => {
     }
 });
 
+
 // Define All Route
 PageRouter(app);
 
@@ -199,11 +200,29 @@ iceServers.push(
     },
 );
 
+//------------------- database
+const db = require("../src/models/model");
+
+// db.sequelize.sync();
+// force: true will drop the table if it already exists
+try{
+  db.sequelize.sync({ force: true }).then(async () => {
+    console.log('Drop and Resync Database with { force: true }');
+    await initial();
+  });
+}
+catch (error) {
+  console.log(error)
+}
+
 server.listen(httpPort, null, () => {
-    console.log(`Listening on port for http ${httpPort}`)
     // server settings
-    log.debug('For HTTP', {
-        server: httpHost,
+    log.debug('Settings ', {
+        port: `Listening on port for http ${httpPort}`,
+        iceServers: iceServers,
+        api_docs: api_docs,
+        api_key_secret: api_key_secret,
+        node_version: process.versions.node,
     });
 });
 // httpsServer.listen(httpsPort, null, () => {
