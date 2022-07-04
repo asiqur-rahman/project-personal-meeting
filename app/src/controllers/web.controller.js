@@ -4,7 +4,7 @@ module.exports.landingPageGet = async(req, res, next) => {
         metaTitle: 'Home | Brain Tech Solution',
         metaDescription:'Home | Brain Tech Solution'
     };
-    res.render('Landing/index',{layout: 'Layout'});
+    res.render('Landing/index',{layout: 'layout'});
 };
 
 module.exports.landingPagePost = async(req, res, next) => {
@@ -18,7 +18,7 @@ module.exports.joinRoomGet = async(req, res, next) => {
         metaTitle: 'Room | Brain Tech Solution',
         metaDescription:'Room | Brain Tech Solution'
     };
-    return res.render('Meeting/index',{layout: false});
+    return res.render('Room/index',{layout: false});
 };
 
 module.exports.error = async(req, res, next) => {
