@@ -9,7 +9,6 @@ module.exports.landingPageGet = async(req, res, next) => {
 
 module.exports.landingPagePost = async(req, res, next) => {
     const {username,useremail,roomName,roomPassword,cameraOn,audioOn,screenShareOnly,openForAll}=req.body;
-    console.log(req.body);
     res.redirect(`/join/${roomName}?name=${username}&audio=${audioOn?audioOn:0}&video=${cameraOn?cameraOn:0}&screen=${screenShareOnly?screenShareOnly:0}`);
 };
 
