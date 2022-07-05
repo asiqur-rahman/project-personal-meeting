@@ -1264,7 +1264,7 @@ function setupLocalMedia(callback, errorback) {
             console.error('Access denied for audio/video', err);
             playSound('alert');
             openURL(
-                `/permission?roomId=${roomId}&getUserMediaError=${err.toString()} <br/> Check the common getusermedia errors <a href="https://blog.addpipe.com/common-getusermedia-errors" target="_blank">here<a/>`,
+                `/error?roomId=${roomId}&errorMsg=${err.toString()}`,
             );
             if (errorback) errorback();
         });

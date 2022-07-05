@@ -8,8 +8,9 @@ module.exports.landingPageGet = async(req, res, next) => {
 };
 
 module.exports.landingPagePost = async(req, res, next) => {
-    const {roomName}=req.body;
-    res.redirect(`/join/${roomName}`);
+    const {username,useremail,roomName,roomPassword,cameraOn,audioOn,screenShareOnly,openForAll}=req.body;
+    console.log(req.body);
+    res.redirect(`/join/${roomName}?name=${username}&audio=${audioOn?audioOn:0}&video=${cameraOn?cameraOn:0}&screen=${screenShareOnly?screenShareOnly:0}`);
 };
 
 module.exports.joinRoomGet = async(req, res, next) => {
@@ -22,10 +23,11 @@ module.exports.joinRoomGet = async(req, res, next) => {
 };
 
 module.exports.error = async(req, res, next) => {
-    console.log(req.body)
+    console.log(req.query)
     res.locals = { 
         metaTitle: 'Error | Brain Tech Solution',
-        metaDescription:'Error | Brain Tech Solution'
+        metaDescription:'Error | Brain Tech Solution',
+        errorData:req.query.errorMsg?req.query.errorMsg:'Something Wrong !'
     };
     return res.render('Error/index',{layout: false});
 };
