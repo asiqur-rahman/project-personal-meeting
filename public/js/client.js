@@ -1213,7 +1213,7 @@ function setButtonsBarPosition(position) {
             document.documentElement.style.setProperty('--btns-right', '25%');
             document.documentElement.style.setProperty('--btns-left', '50%');
             document.documentElement.style.setProperty('--btns-margin-left', '-300px');
-            document.documentElement.style.setProperty('--btns-width', '600px');
+            document.documentElement.style.setProperty('--btns-width', '700px');
             document.documentElement.style.setProperty('--btns-flex-direction', 'row');
             break;
         default:

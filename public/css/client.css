@@ -37,7 +37,7 @@
 
 :root {
     /* common */
-    --status-menu-bg: linear-gradient(#363434, #000000);
+    --status-menu-bg: linear-gradient(#c5c0c0, #034dc4);
     --body-bg: radial-gradient(#393939, #000000);
     --border: 1px solid rgb(255 255 255 / 32%);
 
@@ -160,7 +160,7 @@ body {
     display: none;
     position: fixed;
     padding: 10px;
-
+    background: linear-gradient(#034dc4,#c5c0c0);
     top: var(--btns-top);
     right: var(--btns-right);
     left: var(--btns-left);

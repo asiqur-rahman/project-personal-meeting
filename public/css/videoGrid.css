@@ -49,7 +49,7 @@
 .statusMenu p,
 .statusMenu h4 {
     font-size: small;
-    color: #ffffff;
+    color: #060606;
     display: inline;
     border: none;
     margin-right: 10px;
@@ -57,7 +57,7 @@
 
 .statusMenu button {
     font-size: small;
-    color: #ffffff;
+    color: #060606;
     background: transparent;
     display: inline;
     border: none;
